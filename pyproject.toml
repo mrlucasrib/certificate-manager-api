@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "CertificateManagerAPI"
+version = "0.1.0"
+description = ""
+authors = ["Lucas <lucas.mr@aluno.ufop.edu.br>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.70.0"
+python-multipart = "^0.0.5"
+uvicorn = "^0.15.0"
+SQLAlchemy = "^1.4.27"
+alembic = "^1.7.5"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
