@@ -55,7 +55,7 @@ async def create_upload_file(file: UploadFile = File(...), db: Session = Depends
     # lines = [str.split(line, ",") for line in content.split('\n')]
     # print(crud.create_certificates(db, lines))
 
-    return {"success": True,
+    return {"success": True, 
     "input": file.filename}
 
 
