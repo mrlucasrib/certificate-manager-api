@@ -28,12 +28,20 @@ def get_db(request: Request):
 
 @app.post("/uploadcertificates/")
 async def create_upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)):
-    content = str((await file.read()).decode('utf-8'))
-    lines = [str.split(line, ",") for line in content.split('\n')]
-    crud.create_certificates(db, lines)
-
+    try:
+        content = str((await file.read()).decode('utf-8'))
+        lines = [str.split(line, ",") for line in content.split('\n')]
+        crud.create_certificates(db, lines)
+    except:
+        pass
     return {"success": True}
 
+def decrypt(encrypted, passphrase):
+    IV = Random.new().read(BLOCK_SIZE)
+    aes = AES.new(passphrase, AES.MODE_CFB, IV)
+    return aes.decrypt(base64.b64decode(encrypted))
+
+
 @app.get("/certificate")
-def get_certificate(name: str, db: Session = Depends(get_db)):
-    return crud.get_certificate_by_name(db, name)
+def get_certificate(issue_to: str, db: Session = Depends(get_db)):
+    return crud.get_certificate_by_name(db, issue_to)
