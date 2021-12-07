@@ -21,8 +21,8 @@ def create_certificates(db: Session, data):
     db.commit()
     return 
 
-def get_certificate_by_name(db: Session, name: str):
-    q = select(models.Certificates).where(models.Certificates.issued_to == name)
+def get_certificate_by_name(db: Session, issue_to: str):
+    q = select(models.Certificates).where(models.Certificates.issued_to == issue_to)
     return db.scalar(q)
 
 # def get_items(db: Session, skip: int = 0, limit: int = 100):
